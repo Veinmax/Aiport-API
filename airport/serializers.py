@@ -43,6 +43,14 @@ class AirplaneListSerializer(AirplaneSerializer):
 
 
 class RouteSerializer(serializers.ModelSerializer):
+    def validate(self, attrs):
+        data = super(RouteSerializer, self).validate(attrs=attrs)
+        Route.validate_route(
+            attrs["source"],
+            attrs["destination"],
+            ValidationError
+        )
+        return data
 
     class Meta:
         model = Route
