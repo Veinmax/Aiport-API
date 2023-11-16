@@ -101,7 +101,8 @@ class RouteViewSet(
 class FlightViewSet(viewsets.ModelViewSet):
     queryset = (
         Flight.objects.all()
-        .prefetch_related("route", "airplane", "crews")
+        .select_related("route", "airplane")
+        .prefetch_related("crews")
         .annotate(
             tickets_available=(
                     F("airplane__rows") * F("airplane__seats_in_row")
@@ -136,7 +137,11 @@ class OrderViewSet(
         "tickets__flight__route", "tickets__flight__airplane", "tickets__flight__crews"
     )
     serializer_class = OrderSerializer
+    pagination_class = OrderPagination
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
         if self.action == "list":
