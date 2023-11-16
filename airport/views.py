@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import Count, F
 from rest_framework import viewsets, mixins, status
 from rest_framework.pagination import PageNumberPagination
@@ -112,6 +114,26 @@ class FlightViewSet(viewsets.ModelViewSet):
     )
     serializer_class = FlightSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
+
+    def get_queryset(self):
+        crews = self.request.query_params.get("crews")
+        airplane = self.request.query_params.get("airplane")
+        date = self.request.query_params.get("depart_date")
+
+        queryset = self.queryset
+
+        if airplane:
+            queryset = queryset.filter(airplane__name__icontains=airplane)
+
+        if crews:
+            crews_ids = [int(str_id) for str_id in crews.split(",")]
+            queryset = queryset.filter(crews__id__in=crews_ids)
+
+        if date:
+            date = datetime.strptime(date, "%Y-%m-%d").date()
+            queryset = queryset.filter(departure_time__date=date)
+
+        return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
