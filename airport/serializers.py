@@ -35,11 +35,17 @@ class AirplaneTypeSerializer(serializers.ModelSerializer):
 class AirplaneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Airplane
-        fields = ("id", "name", "rows", "seats_in_row", "airplane_type", "capacity")
+        fields = ("id", "name", "rows", "seats_in_row", "airplane_type", "capacity", "image")
 
 
 class AirplaneListSerializer(AirplaneSerializer):
     airplane_type = serializers.CharField(source="airplane_type.name")
+
+
+class AirplaneImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Airplane
+        fields = ("id", "image")
 
 
 class RouteSerializer(serializers.ModelSerializer):

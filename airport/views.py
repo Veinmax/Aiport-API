@@ -4,10 +4,12 @@ from django.db.models import Count, F
 from rest_framework import viewsets, mixins, status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from airport.permissions import IsAdminOrIfAuthenticatedReadOnly
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .models import (
     Airport,
@@ -25,6 +27,7 @@ from .serializers import (
     AirplaneSerializer,
     AirplaneTypeSerializer,
     AirplaneListSerializer,
+    AirplaneImageSerializer,
     RouteSerializer,
     RouteListSerializer,
     RouteDetailSerializer,
@@ -78,7 +81,27 @@ class AirplaneViewSet(
     def get_serializer_class(self):
         if self.action == "list":
             return AirplaneListSerializer
+
+        if self.action == "upload_image":
+            return AirplaneImageSerializer
+
         return super().get_serializer_class()
+
+    @action(
+        methods=["POST"],
+        detail=True,
+        url_path="upload-image",
+        permission_classes=[IsAdminUser],
+    )
+    def upload_image(self, request, pk=None):
+        """Endpoint for uploading image to specific movie"""
+        movie = self.get_object()
+        serializer = self.get_serializer(movie, data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 
 class RouteViewSet(
@@ -135,7 +158,7 @@ class FlightViewSet(viewsets.ModelViewSet):
             date = datetime.strptime(date, "%Y-%m-%d").date()
             queryset = queryset.filter(departure_time__date=date)
 
-        return queryset
+        return queryset.distinct()
 
     def get_serializer_class(self):
         if self.action == "list":
