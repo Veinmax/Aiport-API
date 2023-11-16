@@ -6,6 +6,8 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from airport.permissions import IsAdminOrIfAuthenticatedReadOnly
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from .models import (
     Airport,
@@ -143,6 +145,32 @@ class FlightViewSet(viewsets.ModelViewSet):
             return FlightDetailSerializer
 
         return super().get_serializer_class()
+
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "crews",
+                type={"type": "list", "items": {"type": "number"}},
+                description="Filter by crew id (ex. ?crews=2,5)",
+            ),
+            OpenApiParameter(
+                "date",
+                type=OpenApiTypes.DATE,
+                description=(
+                        "Filter by datetime of departure time "
+                        "(ex. ?date=2023-10-23)"
+                )
+            ),
+            OpenApiParameter(
+                "airplane",
+                type=OpenApiTypes.STR,
+                description="Filter by airplane name (ex. ?airplane=AeroJet)",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 class OrderPagination(PageNumberPagination):
