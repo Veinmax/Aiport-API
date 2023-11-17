@@ -103,7 +103,6 @@ class AirplaneViewSet(
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 class RouteViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
