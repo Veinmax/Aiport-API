@@ -11,15 +11,7 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import (
-    Airport,
-    Crew,
-    Airplane,
-    AirplaneType,
-    Route,
-    Flight,
-    Order
-)
+from .models import Airport, Crew, Airplane, AirplaneType, Route, Flight, Order
 
 from .serializers import (
     AirportSerializer,
@@ -35,7 +27,7 @@ from .serializers import (
     FlightListSerializer,
     FlightDetailSerializer,
     OrderSerializer,
-    OrderListSerializer
+    OrderListSerializer,
 )
 
 
@@ -108,7 +100,7 @@ class RouteViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
-    GenericViewSet
+    GenericViewSet,
 ):
     queryset = Route.objects.select_related("source", "destination")
     serializer_class = RouteSerializer
@@ -131,8 +123,8 @@ class FlightViewSet(viewsets.ModelViewSet):
         .prefetch_related("crews")
         .annotate(
             tickets_available=(
-                    F("airplane__rows") * F("airplane__seats_in_row")
-                    - Count("tickets")
+                F("airplane__rows") * F("airplane__seats_in_row")
+                - Count("tickets")
             )
         )
     )
@@ -168,7 +160,6 @@ class FlightViewSet(viewsets.ModelViewSet):
 
         return super().get_serializer_class()
 
-
     @extend_schema(
         parameters=[
             OpenApiParameter(
@@ -180,9 +171,9 @@ class FlightViewSet(viewsets.ModelViewSet):
                 "date",
                 type=OpenApiTypes.DATE,
                 description=(
-                        "Filter by datetime of departure time "
-                        "(ex. ?date=2023-10-23)"
-                )
+                    "Filter by datetime of departure time "
+                    "(ex. ?date=2023-10-23)"
+                ),
             ),
             OpenApiParameter(
                 "airplane",
@@ -206,7 +197,9 @@ class OrderViewSet(
     GenericViewSet,
 ):
     queryset = Order.objects.prefetch_related(
-        "tickets__flight__route", "tickets__flight__airplane", "tickets__flight__crews"
+        "tickets__flight__route",
+        "tickets__flight__airplane",
+        "tickets__flight__crews"
     )
     serializer_class = OrderSerializer
     pagination_class = OrderPagination

@@ -60,14 +60,23 @@ class Airport(models.Model):
 
 
 class Route(models.Model):
-    source = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="source_routes")
-    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="destination_routes")
+    source = models.ForeignKey(
+        Airport,
+        on_delete=models.CASCADE,
+        related_name="source_routes"
+    )
+    destination = models.ForeignKey(
+        Airport,
+        on_delete=models.CASCADE,
+        related_name="destination_routes"
+    )
     distance = models.IntegerField()
 
     @staticmethod
     def validate_route(source, destination, error_to_raise):
         if source == destination:
-            raise error_to_raise("Source and destination cannot be the same airport.")
+            raise error_to_raise("Source and destination cannot"
+                                 " be the same airport.")
 
     def clean(self):
         Route.validate_route(
