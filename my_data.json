@@ -1,0 +1,476 @@
+[
+{
+  "model": "airport.airplanetype",
+  "pk": 1,
+  "fields": {
+    "name": "SkyCruiser X2000"
+  }
+},
+{
+  "model": "airport.airplanetype",
+  "pk": 2,
+  "fields": {
+    "name": "AeroJet Explorer 500"
+  }
+},
+{
+  "model": "airport.airplanetype",
+  "pk": 3,
+  "fields": {
+    "name": "Falcon Wingmaster 3000"
+  }
+},
+{
+  "model": "airport.airplanetype",
+  "pk": 4,
+  "fields": {
+    "name": "StratoSwift Elite"
+  }
+},
+{
+  "model": "airport.airplanetype",
+  "pk": 5,
+  "fields": {
+    "name": "Vortex Voyager 7000"
+  }
+},
+{
+  "model": "airport.airplanetype",
+  "pk": 6,
+  "fields": {
+    "name": "SolarJet 4000"
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 1,
+  "fields": {
+    "name": "Celestial Explorer",
+    "rows": 10,
+    "seats_in_row": 5,
+    "airplane_type": 1,
+    "image": ""
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 2,
+  "fields": {
+    "name": "AeroJet Horizon",
+    "rows": 15,
+    "seats_in_row": 4,
+    "airplane_type": 2,
+    "image": ""
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 3,
+  "fields": {
+    "name": "StratoSwift Supreme",
+    "rows": 35,
+    "seats_in_row": 8,
+    "airplane_type": 4,
+    "image": ""
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 4,
+  "fields": {
+    "name": "Vortex Starliner",
+    "rows": 32,
+    "seats_in_row": 6,
+    "airplane_type": 5,
+    "image": ""
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 5,
+  "fields": {
+    "name": "Falcon Skyblade",
+    "rows": 28,
+    "seats_in_row": 7,
+    "airplane_type": 3,
+    "image": ""
+  }
+},
+{
+  "model": "airport.airplane",
+  "pk": 6,
+  "fields": {
+    "name": "Eclipse Express",
+    "rows": 40,
+    "seats_in_row": 6,
+    "airplane_type": 6,
+    "image": ""
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 1,
+  "fields": {
+    "first_name": "Jonathan",
+    "last_name": "Byers"
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 2,
+  "fields": {
+    "first_name": "Jim",
+    "last_name": "Hopper"
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 3,
+  "fields": {
+    "first_name": "Jack",
+    "last_name": "Nicholson"
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 4,
+  "fields": {
+    "first_name": "Leonardo",
+    "last_name": "DiCaprio"
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 5,
+  "fields": {
+    "first_name": "Matt",
+    "last_name": "Damon"
+  }
+},
+{
+  "model": "airport.crew",
+  "pk": 6,
+  "fields": {
+    "first_name": "Emily",
+    "last_name": "Blunt"
+  }
+},
+{
+  "model": "airport.airport",
+  "pk": 1,
+  "fields": {
+    "name": "Kyiv International Airport",
+    "closest_big_city": "Kyiv"
+  }
+},
+{
+  "model": "airport.airport",
+  "pk": 2,
+  "fields": {
+    "name": "Lviv International Airport",
+    "closest_big_city": "Lviv"
+  }
+},
+{
+  "model": "airport.airport",
+  "pk": 3,
+  "fields": {
+    "name": "SkyGate International Airport",
+    "closest_big_city": "New York"
+  }
+},
+{
+  "model": "airport.airport",
+  "pk": 4,
+  "fields": {
+    "name": "DeltaHub Airport",
+    "closest_big_city": "Atlanta"
+  }
+},
+{
+  "model": "airport.airport",
+  "pk": 5,
+  "fields": {
+    "name": "Northern Lights Gateway",
+    "closest_big_city": "Anchorage"
+  }
+},
+{
+  "model": "airport.route",
+  "pk": 1,
+  "fields": {
+    "source": 1,
+    "destination": 2,
+    "distance": 300
+  }
+},
+{
+  "model": "airport.route",
+  "pk": 3,
+  "fields": {
+    "source": 2,
+    "destination": 1,
+    "distance": 250
+  }
+},
+{
+  "model": "airport.route",
+  "pk": 5,
+  "fields": {
+    "source": 4,
+    "destination": 5,
+    "distance": 453
+  }
+},
+{
+  "model": "airport.route",
+  "pk": 6,
+  "fields": {
+    "source": 5,
+    "destination": 2,
+    "distance": 234
+  }
+},
+{
+  "model": "airport.route",
+  "pk": 7,
+  "fields": {
+    "source": 3,
+    "destination": 1,
+    "distance": 312
+  }
+},
+{
+  "model": "airport.flight",
+  "pk": 1,
+  "fields": {
+    "route": 1,
+    "airplane": 2,
+    "departure_time": "2023-11-17T00:23:00Z",
+    "arrival_time": "2023-11-30T09:37:00Z",
+    "crews": [
+      1
+    ]
+  }
+},
+{
+  "model": "airport.flight",
+  "pk": 2,
+  "fields": {
+    "route": 6,
+    "airplane": 1,
+    "departure_time": "2023-11-30T13:51:00Z",
+    "arrival_time": "2023-12-08T20:55:00Z",
+    "crews": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "airport.flight",
+  "pk": 3,
+  "fields": {
+    "route": 7,
+    "airplane": 4,
+    "departure_time": "2023-11-16T18:11:00Z",
+    "arrival_time": "2023-12-07T20:11:00Z",
+    "crews": [
+      4,
+      6
+    ]
+  }
+},
+{
+  "model": "airport.flight",
+  "pk": 4,
+  "fields": {
+    "route": 5,
+    "airplane": 5,
+    "departure_time": "2024-01-18T15:12:00Z",
+    "arrival_time": "2024-01-30T19:15:00Z",
+    "crews": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 1,
+  "fields": {
+    "created_at": "2023-11-16T13:06:18.132Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 2,
+  "fields": {
+    "created_at": "2023-11-16T13:35:03.748Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 3,
+  "fields": {
+    "created_at": "2023-11-16T13:37:34.333Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 4,
+  "fields": {
+    "created_at": "2023-11-16T13:37:45.120Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 5,
+  "fields": {
+    "created_at": "2023-11-16T13:37:51.511Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 6,
+  "fields": {
+    "created_at": "2023-11-16T13:38:09.421Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 7,
+  "fields": {
+    "created_at": "2023-11-16T13:38:25.861Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.order",
+  "pk": 8,
+  "fields": {
+    "created_at": "2023-11-16T13:39:15.513Z",
+    "user": 1
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 1,
+  "fields": {
+    "flight": 1,
+    "order": 1,
+    "row": 5,
+    "seat": 3
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 2,
+  "fields": {
+    "flight": 1,
+    "order": 2,
+    "row": 3,
+    "seat": 3
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 3,
+  "fields": {
+    "flight": 1,
+    "order": 3,
+    "row": 7,
+    "seat": 4
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 4,
+  "fields": {
+    "flight": 2,
+    "order": 4,
+    "row": 7,
+    "seat": 4
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 5,
+  "fields": {
+    "flight": 2,
+    "order": 5,
+    "row": 10,
+    "seat": 4
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 6,
+  "fields": {
+    "flight": 2,
+    "order": 6,
+    "row": 9,
+    "seat": 5
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 7,
+  "fields": {
+    "flight": 2,
+    "order": 7,
+    "row": 9,
+    "seat": 1
+  }
+},
+{
+  "model": "airport.ticket",
+  "pk": 8,
+  "fields": {
+    "flight": 2,
+    "order": 8,
+    "row": 9,
+    "seat": 2
+  }
+},
+{
+  "model": "user.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$BcsVJXFnI22Eio5VVnglTC$3r7q6BJjCpb2RKmjzCvRRokNw9DQjzdsvh5Vpn09lF4=",
+    "last_login": "2023-11-16T12:17:26.346Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-11-15T17:29:36.565Z",
+    "email": "admin@admin.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "user.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$byKim03W3aU3zLcSH66zHd$K9AKnw8z1pKzykJXRZ6LUxB5Ly4l1bdW98bO26RzbeI=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-15T17:31:42.410Z",
+    "email": "testuser@test.com",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
